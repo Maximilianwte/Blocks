@@ -1,6 +1,7 @@
 import Vue from "nativescript-vue";
 
 import Home from "./components/Home";
+import Block from "./components/Block";
 
 new Vue({
 
@@ -10,6 +11,7 @@ new Vue({
         </Frame>`,
 
     components: {
-        Home
+        Home,
+        Block
     }
 }).$start();
