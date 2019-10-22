@@ -15,9 +15,9 @@
     export default {
         data() {
             return {
-                hour: 12,
-                minute: "30",
-                blocks: 7
+                hour: this.$store.state.userSettings.startHour,
+                minute: this.$store.state.userSettings.startMinute,
+                blocks: this.$store.state.userSettings.nBlocks
             }
         },
         methods: {
