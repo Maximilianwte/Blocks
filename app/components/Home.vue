@@ -3,7 +3,7 @@
         <ActionBar class="action-bar" backgroundColor="#2d2d2d">
             <Label class="action-bar-title" text="Blocks" ></Label>
         </ActionBar>
-        <StackLayout backgroundColor="#2d2d2d">    
+        <StackLayout id="view" backgroundColor="#2d2d2d">    
             <Button class="block" @tap="routeTo(Block)" v-for="block in blocks" :key="block" v-bind:text="tellTime(hour, minute, block - 1)+' - '+tellTime(hour, minute, block)" height="90" backgroundColor="#3F4651" width="300"/>
         </StackLayout>
     </Page>
@@ -15,9 +15,9 @@
     export default {
         data() {
             return {
-                hour: 13,
+                hour: 12,
                 minute: "30",
-                blocks: 3
+                blocks: 7
             }
         },
         methods: {
@@ -37,6 +37,9 @@
 </script>
 
 <style scoped lang="scss">
+    #view {
+        padding-top: 15;
+    }
     .block {
         color: white;
         text-align: center;

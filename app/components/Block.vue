@@ -5,33 +5,37 @@
         </ActionBar>
         <StackLayout class="block-outside" backgroundColor="#2d2d2d">
             
-            <Button class="nutricional_block hide" @tap="this.data = true" :class="hide ? this.data == true : ''" height="200" width="200" backgroundColor="#3F4651"/>
-            <Button class="nutricional_block" id="fats" @tap="activateNutrient('fats')" :class="hide ? this.data == false : ''" :height="nutricional.fats" width="200" backgroundColor="#3D5A6C"/>
-            <Button class="nutricional_block" id="protein" @tap="activateNutrient('protein')" :class="hide ? this.data == false : ''" :height="nutricional.protein" width="200" backgroundColor="#FFFD82"/>
-            <Button class="nutricional_block" id="carbs" @tap="activateNutrient('carbs')" :class="hide ? this.data == false : ''" :height="nutricional.carbs" width="200" backgroundColor="#D90368"/>
+            <Button class="nutricional_block" id="fats" @tap="activateNutrient('Fats')" :height="nutricional.fats" width="200" backgroundColor="#3D5A6C"/>
+            <Button class="nutricional_block" id="protein" @tap="activateNutrient('Protein')" :height="nutricional.protein" width="200" backgroundColor="#FFFD82"/>
+            <Button class="nutricional_block" id="carbs" @tap="activateNutrient('Carbs')" :height="nutricional.carbs" width="200" backgroundColor="#D90368"/>
             
-            <StackLayout class="block-outside Input">
+            <StackLayout class="block-outside Input" :class="{hide: active_nutrient == null}">
                 <Label :text="this.input_phrase" />
-                <TextField class="text_field" :text="textFieldValue" hint="35 Grams"/>
-                 <Button class="block" @tap="routeTo(Home)" text="Home" height="90" backgroundColor="#3F4651" width="300"/>
+                <TextField id="nutri" class="text_field" v-model="last_nutrient" hint="35 Grams" keyboardType="number"/>
+                <Label :text="last_nutrient" />
             </StackLayout>
         </StackLayout>
     </Page>
 </template>
 
 <script>
-    import Home from "./Home.vue";
+
     export default {
         data() {
             return {
-                data: true,
                 active_nutrient: null,
-                input_phrase: "Carbs: ",
+                last_nutrient: null,
+                input_phrase: null,
                 nutricional: {
                     carbs: 70,
                     proteins: 50,
                     fats: 90,
                 }
+            }
+        },
+        watch: {
+            last_nutrient: function(val) {
+                //saveNutrional();
             }
         },
         methods: {
@@ -51,13 +55,29 @@
                 this.active_nutrient = nutrient;
                 this.input_phrase = "Input: " + nutrient;
             },
+            saveNutrional() {
+                console.log("hey")
+                switch (this.activateNutrient) {
+                    case ("carbs"):
+                        this.nutricional.carbs = this.last_nutrient;
+                        this.last_nutrient = null;
+                    case ("protein"):
+                        this.nutricional.proteins = this.last_nutrient;
+                        this.last_nutrient = null;
+                 
+                }
+                this.tellBlockSize(nutricional.carbs, nutricional.proteins, nutricional.fats);
+            },
+            x(value) {
+                return x
+            },
             routeTo(View) {
-                this.$navigateTo(Home, {
+                /* this.$navigateTo(Home, {
                 transition: {
                     name:'fade',
                     duration: 50
                 }
-            })
+            }) */
             }
         }
     };
@@ -66,6 +86,9 @@
 <style scoped lang="scss">
     .hide {
         visibility: collapse;
+    }
+    .nutricional_block#pre-block {
+        margin-top: 120;
     }
     .nutricional_block#carbs {
         border-radius: 0 0 10 10;
