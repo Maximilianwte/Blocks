@@ -1,7 +1,7 @@
 <template>
     <Page class="page">
         <ActionBar class="action-bar" backgroundColor="#2d2d2d">
-            <Label class="action-bar-title" text="Blocks" ></Label>
+            <Label class="action-bar-title" text="GetABlock" ></Label>
         </ActionBar>
         <StackLayout class="block-outside" backgroundColor="#2d2d2d">
             
